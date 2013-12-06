@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<html data-ng-app="demo">
+<head>
+
+	<title>ng-YouTubeAPI.js</title>
+
+	<script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular.min.js"></script>
+	<script type="text/javascript" src="demo.js"></script>
+	<script type="text/javascript" src="ng-YouTubeAPI.js"></script>
+
+	<!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.5.0/less.min.js"></script>-->
+
+</head>
+
+<body>
+	<p>
+	Now Playing in myPlayer1:
+	<span data-yt-spy="myPlayer1" data-yt-value="title"></span>
+	<span data-yt-spy="myPlayer1" data-yt-value="author"></span>
+	<span data-yt-spy="myPlayer1" data-yt-value="viewCount"></span>
+	</p>
+
+	<p>
+		<span data-yt-spy2="myPlayer1" data-yt-value="title"></span>
+	</p>
+
+
+	<ul ng-controller="VideoController">
+		<li>Play to myPlayer1</li>
+		<li ng-repeat="video in videos.group1">
+			<span data-yt-playto="myPlayer1" data-yt-vid="{{ video.vid }}"></span>
+		</li>
+		<li>Play to myPlayer2</li>
+		<li ng-repeat="video in videos.group2">
+			<span data-yt-playto="myPlayer2" data-yt-vid="{{ video.vid }}"></span>
+		</li>
+	</ul>
+
+
+
+	<div data-yt-player="myPlayer1" data-yt-vid="Dd7dQh8u4Hc"></div>
+
+	<div data-yt-player="myPlayer2" data-yt-vid="PEikGKDVsCc"></div>
+
+
+
+
+
+
+</body>
+
+</html>
