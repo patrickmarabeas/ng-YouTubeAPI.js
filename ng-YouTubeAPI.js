@@ -25,14 +25,15 @@ module.run( [ '$window', '$document', '$rootScope', function( $window, $document
 module.service( 'constructor', [ function() {
 	return {
 		players: [],
-		construct: function( id, vid ) {
+		construct: function( id, vid, vars ) {
 			this.players[id] = new YT.Player( id, {
 				height: '390',
 				width: '640',
 				videoId: vid,
-				playerVars: {
-					wmode: 'opaque'
-				},
+//				playerVars: {
+//
+//				},
+				playerVars: vars,
 				events: {
 					'onReady': function() {
 					},
@@ -97,8 +98,12 @@ module.directive( 'ytPlayer', [ 'constructor', function( constructor ) {
 		link: function( scope, element, attrs ) {
 
 			scope.$on( 'onYouTubePlayerAPIReady', function( events, args ) {
-				constructor.construct( attrs.ytPlayer, attrs.ytVid );
-				console.log( 'constructing' );
+
+				var vars = eval("("+attrs.ytPlayervars+")");
+				constructor.construct( attrs.ytPlayer, attrs.ytVid, vars );
+
+				console.log(vars);
+				console.log(constructor.players['mainPlayer']);
 			});
 
 			scope.$on( attrs.ytPlayer, function( events, args ) {
