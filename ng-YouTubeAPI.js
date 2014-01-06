@@ -16,9 +16,9 @@ module.run( [ '$window', '$document', '$rootScope', function( $window, $document
 	var firstScriptTag = $document[0].getElementsByTagName( 'script' )[0];
 	firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
 
-	$window.onYouTubePlayerAPIReady = function() {
-		$rootScope.$broadcast( 'onYouTubePlayerAPIReady' );
-	};
+//	$window.onYouTubePlayerAPIReady = function() {
+//		$rootScope.$broadcast( 'onYouTubePlayerAPIReady' );
+//	};
 
 }]);
 
@@ -97,14 +97,15 @@ module.directive( 'ytPlayer', [ 'constructor', function( constructor ) {
 		replace: true,
 		link: function( scope, element, attrs ) {
 
-			scope.$on( 'onYouTubePlayerAPIReady', function( events, args ) {
-
+//			scope.$on( 'onYouTubePlayerAPIReady', function( events, args ) {
+			window.onYouTubePlayerAPIReady = function() {
 				var vars = eval("("+attrs.ytPlayervars+")");
 				constructor.construct( attrs.ytPlayer, attrs.ytVid, vars );
 
 				console.log(vars);
 				console.log(constructor.players['mainPlayer']);
-			});
+			};
+//			});
 
 			scope.$on( attrs.ytPlayer, function( events, args ) {
 
