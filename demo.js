@@ -39,4 +39,21 @@ module.controller( 'VideoController', [ '$scope', 'VideoService', function( $sco
 
 }]);
 
+
+
+
+module.directive( 'ytPlay', [ 'constructor', function( constructor ) {
+	return {
+		scope: {
+			player: '@ytPlay'
+		},
+		link: function( scope, element, attrs) {
+			angular.element( element ).bind( 'click', function() {
+				constructor.players[scope.player].playVideo();
+			});
+		}
+	}
+}]);
+
+
 /*********************************************************/
